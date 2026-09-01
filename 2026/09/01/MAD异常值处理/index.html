@@ -19,21 +19,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="hello">
+    <meta name="description" content="MAD异常值处理MAD，中文简称绝对中位差法，是一种文件的去极值方法，比其他方法更具有鲁棒性。 定义MAD是数据点与其中位数之差的绝对值的中位数。 公式为：MAD &#x3D; median( |Xi- median(X)|) median：求中位数 核心思想为先找到数据的中位数，然后计算每个点偏离中心的程度，再取这些偏离程度的中位数作为“典型偏离尺度” 步骤1、计算数据的中位数 M &#x3D;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello Post">
-<meta property="og:url" content="https://boershang.github.io/2026/08/29/Hello-Post/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://boershang.github.io/2026/09/01/MAD%E5%BC%82%E5%B8%B8%E5%80%BC%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="hello">
+<meta property="og:description" content="MAD异常值处理MAD，中文简称绝对中位差法，是一种文件的去极值方法，比其他方法更具有鲁棒性。 定义MAD是数据点与其中位数之差的绝对值的中位数。 公式为：MAD &#x3D; median( |Xi- median(X)|) median：求中位数 核心思想为先找到数据的中位数，然后计算每个点偏离中心的程度，再取这些偏离程度的中位数作为“典型偏离尺度” 步骤1、计算数据的中位数 M &#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-08-29T08:35:45.000Z">
-<meta property="article:modified_time" content="2026-08-29T08:45:59.386Z">
+<meta property="article:published_time" content="2026-09-01T02:02:10.241Z">
+<meta property="article:modified_time" content="2026-09-01T03:03:21.736Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello Post - Hexo</title>
+  <title>Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -302,7 +302,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello Post"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -313,8 +313,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-08-29 16:35" pubdate>
-          2026年8月29日 下午
+        <time datetime="2026-09-01 10:02" pubdate>
+          2026年9月1日 上午
         </time>
       </span>
     
@@ -325,7 +325,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5 字
+          2.3k 字
         
       </span>
     
@@ -336,7 +336,7 @@
         
         
         
-          1 分钟
+          20 分钟
         
       </span>
     
@@ -375,12 +375,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello Post</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1>
+                <h1 id="MAD异常值处理"><a href="#MAD异常值处理" class="headerlink" title="MAD异常值处理"></a>MAD异常值处理</h1><p>MAD，中文简称绝对中位差法，是一种文件的去极值方法，比其他方法更具有鲁棒性。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>MAD是数据点与其中位数之差的绝对值的中位数。</p>
+<p>公式为：MAD &#x3D; median( |X<del>i</del>- median(X)|)</p>
+<p>median：求中位数</p>
+<p>核心思想为先找到数据的中位数，然后计算每个点偏离中心的程度，再取这些偏离程度的中位数作为“典型偏离尺度”</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>1、计算数据的中位数</p>
+<p>M &#x3D; median(X)</p>
+<p>2、计算绝对偏差</p>
+<p>d<del>i</del> &#x3D; | X<del>i</del> - M |</p>
+<p>3、计算这些绝对偏差的中位数</p>
+<p>MAD &#x3D; median(d<del>1</del> , d<del>2</del>,… d<del>n</del>)</p>
+<p>4、将MAD标准化</p>
+<p>5、设置阈值，处理极值</p>
+<p>温和异常值：超出中位数 ±2 x 1.4826 x MAD</p>
+<p>极端异常值：超出中位数 ±3 x 1.4826 x MAD</p>
+<p><strong>对于异常值的处理方式：</strong></p>
+<p>截断：将超出阈值的点强制设为阈值边界值</p>
+<p>删除：删除异常值，适用于对样本数量没有要求的数据集</p>
+<p>填充：用中值替换</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">detect_outliers_mad</span>(<span class="hljs-params">data, threshold=<span class="hljs-number">3.5</span>, constant=<span class="hljs-number">1.4826</span>, return_index=<span class="hljs-literal">False</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    使用 MAD（Median Absolute Deviation）方法检测异常值。</span><br><span class="hljs-string">参数:</span><br><span class="hljs-string">    data : array-like</span><br><span class="hljs-string">        输入数据（一维数值序列）。</span><br><span class="hljs-string">    threshold : float, 默认=3.5</span><br><span class="hljs-string">        判定异常值的倍数阈值，通常取 2.5 ~ 3.5。</span><br><span class="hljs-string">    constant : float, 默认=1.4826</span><br><span class="hljs-string">        将 MAD 转化为标准差估计的常数（正态分布下为 1.4826）。</span><br><span class="hljs-string">    return_index : bool, 默认=False</span><br><span class="hljs-string">        若为 True，返回异常值的索引列表；否则返回布尔掩码数组。</span><br><span class="hljs-string"></span><br><span class="hljs-string">返回:</span><br><span class="hljs-string">    outliers : ndarray (bool) 或 list (int)</span><br><span class="hljs-string">        布尔掩码（True 表示异常值）或异常值的索引列表。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>data = np.asarray(data)<br><span class="hljs-keyword">if</span> data.ndim != <span class="hljs-number">1</span>:<br>    <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;输入数据必须是一维数组&quot;</span>)<br><br>median = np.median(data)<br>mad = np.median(np.<span class="hljs-built_in">abs</span>(data - median))<br><br><span class="hljs-comment"># 当 MAD 为 0 时，无法进行标准化，此时认为没有异常值</span><br><span class="hljs-keyword">if</span> mad == <span class="hljs-number">0</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;警告: MAD = 0，所有数据相同，无异常值。&quot;</span>)<br>    <span class="hljs-keyword">if</span> return_index:<br>        <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> np.zeros_like(data, dtype=<span class="hljs-built_in">bool</span>)<br><br><span class="hljs-comment"># 计算修正后的标准差估计</span><br>sigma = constant * mad<br><span class="hljs-comment"># 计算每个点的 Z-score（基于 MAD）</span><br>z_scores = np.<span class="hljs-built_in">abs</span>(data - median) / sigma<br><br><span class="hljs-comment"># 判定异常值</span><br>outlier_mask = z_scores &gt; threshold<br><br><span class="hljs-keyword">if</span> return_index:<br>    <span class="hljs-keyword">return</span> np.where(outlier_mask)[<span class="hljs-number">0</span>].tolist()<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">return</span> outlier_mask<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">filter_outliers_mad</span>(<span class="hljs-params">data, threshold=<span class="hljs-number">3.5</span>, constant=<span class="hljs-number">1.4826</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    使用 MAD 方法过滤掉异常值，返回清洗后的数据。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    mask = detect_outliers_mad(data, threshold, constant, return_index=<span class="hljs-literal">False</span>)<br>    <span class="hljs-keyword">return</span> data[~mask]<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 生成示例数据：大部分正常，加上几个异常值</span><br>    np.random.seed(<span class="hljs-number">42</span>)<br>    normal_data = np.random.normal(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>    outliers = np.array([<span class="hljs-number">10</span>, -<span class="hljs-number">12</span>, <span class="hljs-number">8.5</span>])  <span class="hljs-comment"># 明显异常</span><br>    data = np.concatenate([normal_data, outliers])<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;原始数据大小:&quot;</span>, <span class="hljs-built_in">len</span>(data))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;数据中手动加入的异常值:&quot;</span>, outliers)<br><br><span class="hljs-comment"># 1. 检测异常值（返回布尔掩码）</span><br>outlier_mask = detect_outliers_mad(data, threshold=<span class="hljs-number">3.5</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n异常值掩码 (True 为异常):&quot;</span>, outlier_mask)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;检测到的异常值索引:&quot;</span>, np.where(outlier_mask)[<span class="hljs-number">0</span>])<br><br><span class="hljs-comment"># 2. 检测异常值（返回索引列表）</span><br>outlier_indices = detect_outliers_mad(data, threshold=<span class="hljs-number">3.5</span>, return_index=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;异常值索引列表:&quot;</span>, outlier_indices)<br><br><span class="hljs-comment"># 3. 过滤异常值</span><br>cleaned_data = filter_outliers_mad(data, threshold=<span class="hljs-number">3.5</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n过滤后数据大小:&quot;</span>, <span class="hljs-built_in">len</span>(cleaned_data))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;过滤后的数据前10个:&quot;</span>, cleaned_data[:<span class="hljs-number">10</span>])<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
                 
               </div>
             
@@ -397,8 +422,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello Post</div>
-      <div>https://boershang.github.io/2026/08/29/Hello-Post/</div>
+      <div></div>
+      <div>https://boershang.github.io/2026/09/01/MAD异常值处理/</div>
     </div>
     <div class="license-meta">
       
@@ -410,7 +435,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年8月29日</div>
+          <div>2026年9月1日</div>
         </div>
       
       
@@ -442,15 +467,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/08/31/%E6%BB%A4%E6%B3%A2%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2026/08/31/%E6%BB%A4%E6%B3%A2%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
