@@ -1,0 +1,930 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="从零开始摸索 3-RRR 平面并联机构：我的运动学学习与实践记录2026年10月7日 · 机器人 &#x2F; 机构学 &#x2F; Python &#x2F; SolidWorks 最近开始接触并联机器人，想找一个具体的机构，把之前学过的机械设计、Python 编程和数学建模知识结合起来。 最后，我选择了 3-RRR 平面并联机构作为自己的入门项目。 这篇文章主要记录我目前做过的事情，包括逆运动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自制3-RRR简易机器人">
+<meta property="og:url" content="https://boershang.github.io/2026/10/10/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%91%B8%E7%B4%A2%203-RRR%20%E5%B9%B3%E9%9D%A2%E5%B9%B6%E8%81%94%E6%9C%BA%E6%9E%84%EF%BC%9A%E6%88%91%E7%9A%84%E8%BF%90%E5%8A%A8%E5%AD%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="从零开始摸索 3-RRR 平面并联机构：我的运动学学习与实践记录2026年10月7日 · 机器人 &#x2F; 机构学 &#x2F; Python &#x2F; SolidWorks 最近开始接触并联机器人，想找一个具体的机构，把之前学过的机械设计、Python 编程和数学建模知识结合起来。 最后，我选择了 3-RRR 平面并联机构作为自己的入门项目。 这篇文章主要记录我目前做过的事情，包括逆运动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://boershang.github.io/images/3-rrr-learning/image-20261010193925420.png">
+<meta property="og:image" content="https://boershang.github.io/images/3-rrr-learning/image-20261010193933039.png">
+<meta property="og:image" content="https://boershang.github.io/images/3-rrr-learning/image-20261010193948298.png">
+<meta property="og:image" content="https://boershang.github.io/images/3-rrr-learning/image-20261010193955431.png">
+<meta property="article:published_time" content="2026-10-10T11:42:23.000Z">
+<meta property="article:modified_time" content="2026-10-10T11:47:17.816Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://boershang.github.io/images/3-rrr-learning/image-20261010193925420.png">
+  
+  
+  
+  <title>自制3-RRR简易机器人 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"boershang.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":75,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BoerShang</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>主页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>目录</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于作者</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>主页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>目录</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于作者</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自制3-RRR简易机器人"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-10-10 19:42" pubdate>
+          2026年10月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">自制3-RRR简易机器人</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="从零开始摸索-3-RRR-平面并联机构：我的运动学学习与实践记录"><a href="#从零开始摸索-3-RRR-平面并联机构：我的运动学学习与实践记录" class="headerlink" title="从零开始摸索 3-RRR 平面并联机构：我的运动学学习与实践记录"></a>从零开始摸索 3-RRR 平面并联机构：我的运动学学习与实践记录</h1><p><em>2026年10月7日 · 机器人 &#x2F; 机构学 &#x2F; Python &#x2F; SolidWorks</em></p>
+<p>最近开始接触并联机器人，想找一个具体的机构，把之前学过的机械设计、Python 编程和数学建模知识结合起来。</p>
+<p>最后，我选择了 <strong>3-RRR 平面并联机构</strong>作为自己的入门项目。</p>
+<p>这篇文章主要记录我目前做过的事情，包括逆运动学求解、Python 可视化、SolidWorks 三维建模，以及过程中遇到的一些问题。</p>
+<p>目前还处于学习阶段，很多理论并没有完全掌握，所以这更像是一篇阶段性的学习笔记，而不是一份完整的研究成果。</p>
+<h2 id="01｜为什么选择-3-RRR？"><a href="#01｜为什么选择-3-RRR？" class="headerlink" title="01｜为什么选择 3-RRR？"></a>01｜为什么选择 3-RRR？</h2><p>我一直对机器人机构设计和运动分析比较感兴趣。</p>
+<p>之前在做智能分拣装置的机械设计时，接触过龙门架、导轨、丝杠传动、同步带以及各种机械装配关系。这些经历让我逐渐意识到，画出一个三维模型只是第一步，更重要的是理解机构为什么能够运动，以及各个零件之间存在怎样的约束关系。</p>
+<p>后来在了解并联机器人，以及尤老师关于可重构并联机构的相关研究时，我对这类机构产生了兴趣。</p>
+<p>相比一些结构复杂的空间并联机器人，3-RRR 平面并联机构相对容易理解。</p>
+<p>它由三条支链共同连接一个动平台，每条支链包含三个转动副（R 表示 Revolute Joint）。虽然结构看起来不算复杂，但其中涉及逆运动学、正运动学、工作空间和奇异性分析等一系列问题。</p>
+<p>对我来说，它正好是一个合适的起点。</p>
+<p>我希望先通过一个简单的平面机构，逐步建立从数学建模、程序计算到三维机构设计的完整认识。</p>
+<h2 id="02｜开始之前，我有哪些基础？"><a href="#02｜开始之前，我有哪些基础？" class="headerlink" title="02｜开始之前，我有哪些基础？"></a>02｜开始之前，我有哪些基础？</h2><p>在机械设计方面，我主要使用 SolidWorks，目前也在进行智能分拣装置的机构设计。</p>
+<p>从零件建模到装配关系设置，我已经有了一些实践经验，但对于复杂机构的运动约束和动力学问题，还需要进一步学习。</p>
+<p>编程方面，我比较熟悉 Python，之前做过数学建模中的几何计算、参数扫描、结果可视化和灵敏度分析。</p>
+<p>在2026年全国大学生数学建模竞赛中，我担任编程手，最终获得省一等奖。</p>
+<p>这些经历让我对用程序解决数学问题比较熟悉，也让我产生了一个想法：</p>
+<p><strong>能不能通过 Python，把机器人机构的运动过程真正计算出来，再用三维模型验证？</strong></p>
+<p>当然，目前我的理论基础还不够完整。</p>
+<p>特别是雅可比矩阵、奇异性分类、刚度建模以及并联机构的正运动学，这些都是接下来需要重点补充的内容。</p>
+<h2 id="03｜第一个小目标：实现-3-RRR-逆运动学求解"><a href="#03｜第一个小目标：实现-3-RRR-逆运动学求解" class="headerlink" title="03｜第一个小目标：实现 3-RRR 逆运动学求解"></a>03｜第一个小目标：实现 3-RRR 逆运动学求解</h2><p>我首先尝试用 Python 编写一个 3-RRR 平面并联机构的逆运动学求解程序。</p>
+<p>为了降低初期建模的复杂度，我采用了比较标准的几何模型：</p>
+<ul>
+<li>固定平台和动平台均为等边三角形。</li>
+<li>三条支链分别由两段连杆连接。</li>
+<li>每条支链包含三个转动副。</li>
+<li>输入动平台目标位姿，计算三个主动关节角度。</li>
+</ul>
+<p>程序的主要输入包括固定平台边长、动平台边长、两段连杆长度 L1 和 L2，以及动平台的目标位姿 (x, y, φ)。</p>
+<p>输出则是三个主动关节角 θ1、θ2、θ3，以及各条支链可能出现的几何构型。</p>
+<h3 id="我是怎么理解逆运动学的？"><a href="#我是怎么理解逆运动学的？" class="headerlink" title="我是怎么理解逆运动学的？"></a>我是怎么理解逆运动学的？</h3><p>最开始接触逆运动学时，我觉得它可能需要比较复杂的数学推导。</p>
+<p>但在这个简化模型中，可以先把问题拆开来看。</p>
+<p>第一步，根据动平台中心的位置和旋转角度，计算三个连接点 C1、C2、C3 的坐标。</p>
+<p>第二步，分别分析三条支链。</p>
+<p>对于其中一条支链，固定端 Ai 和动平台连接点 Ci 的位置已知，两段连杆的长度也已知。</p>
+<p>这样一来，问题就转化成了一个平面二连杆的几何求解问题。</p>
+<p>利用距离公式、反正切函数以及余弦定理，就可以计算主动杆的方向角。</p>
+<p>三条支链分别求解，最后便得到整个机构的逆运动学结果。</p>
+<p>这让我发现，复杂机构的运动学问题，有时也可以通过合理拆分，转化成几个相对容易处理的几何问题。</p>
+<h2 id="04｜第一次运行：为什么会出现八组解？"><a href="#04｜第一次运行：为什么会出现八组解？" class="headerlink" title="04｜第一次运行：为什么会出现八组解？"></a>04｜第一次运行：为什么会出现八组解？</h2><p>完成基本求解后，我使用了一组参数进行测试：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>固定平台边长</td>
+<td>60 mm</td>
+</tr>
+<tr>
+<td>动平台边长</td>
+<td>60 mm</td>
+</tr>
+<tr>
+<td>第一连杆长度 L1</td>
+<td>100 mm</td>
+</tr>
+<tr>
+<td>第二连杆长度 L2</td>
+<td>100 mm</td>
+</tr>
+<tr>
+<td>动平台中心 X</td>
+<td>35 mm</td>
+</tr>
+<tr>
+<td>动平台中心 Y</td>
+<td>65 mm</td>
+</tr>
+<tr>
+<td>动平台转角 φ</td>
+<td>10°</td>
+</tr>
+</tbody></table>
+<p><img src="/images/3-rrr-learning/image-20261010193925420.png" srcset="/img/loading.gif" lazyload alt="image-20261010193925420"></p>
+<p><em>图1：Python 逆运动学程序参数输入。</em></p>
+<p>运行程序后，得到了八组不同的逆运动学分支组合。</p>
+<p>一开始看到八组结果时，我还专门思考了一下为什么会出现这种情况。</p>
+<p>原因是对于一条平面二连杆支链，在满足几何条件的情况下，通常存在两种不同的弯曲构型。</p>
+<p>而 3-RRR 机构共有三条支链，因此理论上最多可以组合出：</p>
+<p><strong>2 × 2 × 2 &#x3D; 8 种逆运动学分支组合。</strong></p>
+<p>例如，在这次测试中，其中一组计算结果为：</p>
+<ul>
+<li>θ1 &#x3D; -1.178°</li>
+<li>θ2 &#x3D; -15.875°</li>
+<li>θ3 &#x3D; -2.348°</li>
+</ul>
+<p>程序还输出了其余七组分支对应的关节角。</p>
+<p><img src="/images/3-rrr-learning/image-20261010193933039.png" srcset="/img/loading.gif" lazyload alt="image-20261010193933039"></p>
+<p><em>图2：理论上的八种逆运动学分支组合及关节角。</em></p>
+<p>随后，我对计算结果进行了连杆长度一致性检查。</p>
+<p>在当前几何假设和测试参数下，程序能够正常完成计算，相关几何约束也得到了满足。</p>
+<p>不过，这并不意味着八组结果都能直接用于实际机构。</p>
+<p>目前的程序还没有完整考虑关节角限位、连杆之间的干涉以及机构奇异性等问题。</p>
+<p>另外，这个 Demo 的代码整理过程中也借助了 AI 辅助，但运动学原理和结果验证仍然是我需要自己继续理解的部分。</p>
+<h2 id="05｜把计算结果画出来，再尝试建立三维模型"><a href="#05｜把计算结果画出来，再尝试建立三维模型" class="headerlink" title="05｜把计算结果画出来，再尝试建立三维模型"></a>05｜把计算结果画出来，再尝试建立三维模型</h2><p>仅仅输出一组关节角，其实很难直观理解机构到底处于什么状态。</p>
+<p>所以，我又尝试用 Python 将其中一个逆运动学分支可视化。</p>
+<p>这里选择的是三条支链均采用负号分支的 <code>---</code> 组合。</p>
+<p><img src="/images/3-rrr-learning/image-20261010193948298.png" srcset="/img/loading.gif" lazyload alt="image-20261010193948298"></p>
+<p><em>图3：3-RRR 平面并联机构的构型可视化。</em></p>
+<p>在图中，可以看到固定平台、动平台、三条支链以及各个连接点之间的几何关系。</p>
+<p>相比单纯观察角度数值，这种方式更加直观，也方便后续检查机构的几何构型。</p>
+<p>需要说明的是，这张图展示的是一个具体位姿下的机构构型，还不是完整的工作空间分析结果。</p>
+<h3 id="从二维计算到-SolidWorks"><a href="#从二维计算到-SolidWorks" class="headerlink" title="从二维计算到 SolidWorks"></a>从二维计算到 SolidWorks</h3><p>完成初步的运动学计算后，我开始尝试在 SolidWorks 中建立对应的三维机构模型。</p>
+<p>目前主要完成了固定支架、动平台、支链连杆以及部分标准件的建模，并进行了初步装配。</p>
+<p><img src="/images/3-rrr-learning/image-20261010193955431.png" srcset="/img/loading.gif" lazyload alt="image-20261010193955431"></p>
+<p><em>图4：SolidWorks 三维装配模型。</em></p>
+<p>在这个过程中，我发现数学模型和三维装配模型虽然描述的是同一个机构，但关注点并不完全相同。</p>
+<p>数学模型更强调几何关系和运动约束，而在 SolidWorks 中，还需要考虑实际零件的连接方式、装配关系以及运动副的设置。</p>
+<p>目前，我还没有完成数学模型与三维装配模型之间的对应验证。</p>
+<p>下一步准备完善运动副设置和自由度分析，再尝试进行运动仿真，比较 Python 计算结果与 SolidWorks 仿真结果是否一致。</p>
+<h2 id="06｜做到这里，我又产生了三个问题"><a href="#06｜做到这里，我又产生了三个问题" class="headerlink" title="06｜做到这里，我又产生了三个问题"></a>06｜做到这里，我又产生了三个问题</h2><p>虽然目前已经完成了一个基础的逆运动学 Demo，但我觉得真正值得研究的问题才刚刚开始。</p>
+<h3 id="问题一：这个机构的工作空间究竟有多大？"><a href="#问题一：这个机构的工作空间究竟有多大？" class="headerlink" title="问题一：这个机构的工作空间究竟有多大？"></a>问题一：这个机构的工作空间究竟有多大？</h3><p>逆运动学程序能够判断某个目标位姿是否存在几何解，但我更想知道：</p>
+<p><strong>动平台究竟能够到达哪些位置？</strong></p>
+<p>而且，当动平台的旋转角 φ 改变时，即使连杆长度不变，可达位置范围是否也会发生变化？</p>
+<p>我准备先固定 φ，利用 Python 进行二维网格扫描，绘制不同姿态下的可达工作空间，再比较结果。</p>
+<h3 id="问题二：哪些位置会让机构接近奇异？"><a href="#问题二：哪些位置会让机构接近奇异？" class="headerlink" title="问题二：哪些位置会让机构接近奇异？"></a>问题二：哪些位置会让机构接近奇异？</h3><p>这是我目前比较想深入理解的内容。</p>
+<p>一个机构存在逆运动学解，并不代表它在该位置就一定具有良好的运动性能。</p>
+<p>某些特殊构型可能导致机构接近奇异状态。</p>
+<p>虽然已经接触过雅可比矩阵和奇异性这些概念，但我还没有真正建立它们与具体杆件姿态之间的联系。</p>
+<p>接下来希望通过具体的几何构型，逐步理解雅可比矩阵的作用，并尝试判断机构的奇异位形。</p>
+<h3 id="问题三：怎样判断一组结构参数更合理？"><a href="#问题三：怎样判断一组结构参数更合理？" class="headerlink" title="问题三：怎样判断一组结构参数更合理？"></a>问题三：怎样判断一组结构参数更合理？</h3><p>如果改变 L1、L2 或者平台尺寸，机构的工作空间可能会随之变化。</p>
+<p>但工作空间更大，就一定代表机构性能更好吗？</p>
+<p>有没有可能工作空间扩大了，却同时增加了接近奇异位形的区域？</p>
+<p>我希望后续能够通过参数扫描和数值分析，尝试建立一个兼顾可达性与运动性能的评价方法。</p>
+<h2 id="07｜接下来准备做什么？"><a href="#07｜接下来准备做什么？" class="headerlink" title="07｜接下来准备做什么？"></a>07｜接下来准备做什么？</h2><p>目前给自己安排了三个阶段的小目标。</p>
+<p><strong>第一阶段：完善已有的逆运动学程序。</strong></p>
+<p>整理 Python 代码，补充不同目标位姿下的测试，并对照 SolidWorks 模型，检查几何定义是否一致。</p>
+<p><strong>第二阶段：开展工作空间分析。</strong></p>
+<p>先从固定姿态下的二维网格扫描开始，研究不同杆长和平台尺寸对可达区域的影响。</p>
+<p><strong>第三阶段：学习雅可比矩阵和奇异性分析。</strong></p>
+<p>在理解基础理论后，尝试阅读并复现一篇与 3-RRR 或可重构并联机构相关的论文。</p>
+<p>更长远一些，我也希望接触 Stewart 型等空间并联机构，逐步了解更加复杂的机器人机构设计问题。</p>
+<p>如果未来有机会参与相关科研项目，我也愿意先从文献整理、数值仿真、程序复现、SolidWorks 建模或者实验辅助等基础工作做起。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>回头看这段时间的学习，其实目前完成的内容还比较基础。</p>
+<p>一个简化的 3-RRR 逆运动学求解程序，一张机构构型可视化图，以及一个还在完善中的 SolidWorks 装配模型。</p>
+<p>但对我来说，这已经是一次比较有意义的尝试。</p>
+<p>之前接触的数学建模、Python 和机械设计，大多是在不同的任务中分别使用。这次终于尝试把它们放到同一个机器人机构问题里。</p>
+<p>过程中也发现，<strong>程序能够算出结果，与真正理解机构为什么这样运动，仍然是两回事。</strong></p>
+<p>接下来希望不只是让程序运行起来，而是能够逐渐理解计算结果背后的运动学原理，并将它们与实际机构联系起来。</p>
+<p>这篇文章就作为我的第一篇 3-RRR 学习记录。后续如果在工作空间、奇异性分析或者运动仿真方面有新的进展，再继续更新。</p>
+<p>通过网盘分享的文件：自制3-RRR机器人.zip<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1SBVY1EjX4OFtlnWr1qxGXQ?pwd=aafa">https://pan.baidu.com/s/1SBVY1EjX4OFtlnWr1qxGXQ?pwd=aafa</a> 提取码: aafa</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>自制3-RRR简易机器人</div>
+      <div>https://boershang.github.io/2026/10/10/从零开始摸索 3-RRR 平面并联机构：我的运动学学习与实践记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年10月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/10/06/%E6%99%BA%E8%83%BD%E5%88%86%E6%8B%A3%E6%9C%BA%E6%9E%84%E5%88%9D%E8%AE%BE%E8%AE%A1/" title="智能分拣机构初设计">
+                        <span class="hidden-mobile">智能分拣机构初设计</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
